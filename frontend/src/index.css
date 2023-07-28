@@ -11,7 +11,6 @@ nav>a{
     border-radius: 15px;
     height: 3vh;
     margin: 2em;
-    padding-top: 8px;
     width: 10vh;
     text-align: center;
 }
@@ -50,3 +49,30 @@ nav>h2{
   .autocomplete-item:hover {
     background-color: #6f6f6f;
   }
+  .filters-container,.sort-container{
+    width: 20%;
+  }
+  .card-body{
+    display: block;
+  }
+  .filter-btn,.sort-btn{
+    width: 100%;
+    text-align: left;
+    background-color: #6f6f6f
+  }
+.filter-radio-btns{
+    width: 3vh;
+}
+.apply-btn{
+    float: right;
+    border-radius: 10px;
+    background-color: rgb(159, 109, 15);
+    color: white;
+    border: none;
+    width: 40%;
+    height: 15%;
+}
+.apply-filter-btn:hover{
+    background-color: rgb(212, 171, 100);
+    color: black;
+}
