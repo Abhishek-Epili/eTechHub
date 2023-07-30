@@ -14,7 +14,7 @@ nav>a {
   margin: 2em;
   width: 10vh;
   text-align: center;
-  padding-top: 5px;
+  padding: 5px 5px;
 }
 
 nav>a:hover {
@@ -102,20 +102,28 @@ input[type="number"] {
   height: 5vh;
   border: 1px solid rgb(102, 101, 101);
 }
-
+.products>span{
+  border:none;
+  width: 17rem;
+  height: auto;
+  margin: 0vh 0vh 4vh 4vh;
+}
+.products>span:hover{
+  transform: scale(1.15);
+}
+.product-card{
+  margin: 0;
+}
 .products {
   display: flex;
   flex-wrap: wrap;
 }
 
-.products>* {
-  margin: 2vh;
-}
-
 .productpage {
   display: grid;
-  grid-template-columns: auto auto;
+  grid-template-columns: 18% auto ;
 }
-.product-card{
-  box-shadow: 1px 1px 2px 1px;
+.p-card-body{
+  background-color: black;
+  color: white;
 }

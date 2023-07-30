@@ -95,14 +95,14 @@ function ProdcutPage() {
                     </div>
                 </div>
                 <div className="products">
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
-                    <Card />
+                    <span> <Card /></span>
+                    <span> <Card /></span>
+                    <span> <Card /></span>
+                    <span> <Card /></span>
+                    <span> <Card /></span>
+                    <span> <Card /></span>
+                    <span> <Card /></span>
+                    <span> <Card /></span>
                 </div>
             </div>
         </>
