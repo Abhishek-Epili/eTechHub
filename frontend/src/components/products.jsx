@@ -1,4 +1,4 @@
-import { useState } from "react"
+import { useState, useEffect } from "react"
 import Card from "./card";
 
 function ProdcutPage() {
@@ -6,6 +6,20 @@ function ProdcutPage() {
     const [price, setPrice] = useState('');
     const [filterType, setFilterType] = useState('');
     const [sortType, setSortType] = useState('');
+    const [gadgets , setGadget] = useState(null);
+
+    useEffect(()=>{
+        const fetchGadgets = async() =>{
+            const response = await fetch("http://localhost:4000/api/products")
+            console.log(response)
+            const json = await response.json()
+            if (response.ok){
+                setGadget(json);
+                console.log(json);
+            }
+        }
+        fetchGadgets()
+    },[])
 
     const handlePriceChange = (event) => {
         setPrice(event.target.value);
@@ -95,14 +109,13 @@ function ProdcutPage() {
                     </div>
                 </div>
                 <div className="products">
-                    <span> <Card /></span>
-                    <span> <Card /></span>
-                    <span> <Card /></span>
-                    <span> <Card /></span>
-                    <span> <Card /></span>
-                    <span> <Card /></span>
-                    <span> <Card /></span>
-                    <span> <Card /></span>
+                    {gadgets && gadgets.map(gadget =>(
+                        <span key={gadget._id}> 
+                        <Card 
+                            img_url = {gadget.gadgetImage}
+                            name = {gadget.gadgetName}
+                        /></span>
+                    ) )}
                 </div>
             </div>
         </>

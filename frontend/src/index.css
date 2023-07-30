@@ -104,9 +104,12 @@ input[type="number"] {
 }
 .products>span{
   border:none;
-  width: 17rem;
+  width: 18rem;
   height: auto;
   margin: 0vh 0vh 4vh 4vh;
+}
+.card-img-top{
+  height: 35vh;
 }
 .products>span:hover{
   transform: scale(1.15);
