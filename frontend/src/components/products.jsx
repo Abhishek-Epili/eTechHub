@@ -11,11 +11,9 @@ function ProdcutPage() {
     useEffect(()=>{
         const fetchGadgets = async() =>{
             const response = await fetch("http://localhost:4000/api/products")
-            console.log(response)
             const json = await response.json()
             if (response.ok){
                 setGadget(json);
-                console.log(json);
             }
         }
         fetchGadgets()
@@ -110,7 +108,9 @@ function ProdcutPage() {
                 </div>
                 <div className="products">
                     {gadgets && gadgets.map(gadget =>(
-                        <span key={gadget._id}> 
+                        <span key={gadget._id} onClick={()=>{
+                            location.href = "/viewproduct/"+gadget._id
+                        }}> 
                         <Card 
                             img_url = {gadget.gadgetImage}
                             name = {gadget.gadgetName}
