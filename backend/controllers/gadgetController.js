@@ -3,7 +3,7 @@ const mongoose = require('mongoose')
 
 const getGadgets = async (req,res) => {
     try{
-        const gadgets = await Gadget.find({}).sort({createdAt: -1})
+        const gadgets = await Gadget.find({}).sort({"gadgetReviews.rating": -1})
         res.status(200).json(gadgets)
     }
     catch(error){
