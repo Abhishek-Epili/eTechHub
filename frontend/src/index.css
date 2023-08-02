@@ -47,8 +47,8 @@ nav>h2 {
   position: absolute;
   border: 1px solid #ccc;
   max-height: 150px;
-  overflow-y: auto;
   background-color: white;
+  z-index: 999;
 }
 
 .autocomplete-item {
@@ -63,7 +63,9 @@ nav>h2 {
 .card-body {
   display: block;
 }
-
+.filter-sort-body>*{
+  margin: 5px 0px 5px 0px;
+}
 .filter-btn,
 .sort-btn {
   width: 100%;
@@ -75,17 +77,17 @@ nav>h2 {
   width: 3vh;
 }
 
-.apply-btn {
-  float: right;
+.cancel-btn {
   border-radius: 10px;
   background-color: rgb(159, 109, 15);
   color: white;
   border: none;
-  width: 40%;
-  height: 5vh;
+  width: auto;
+  height: auto;
+  padding: 0.4em;
 }
 
-.apply-btn:hover {
+.cancel-btn:hover {
   background-color: rgb(191, 156, 90);
   color: black;
 }
