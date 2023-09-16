@@ -12,7 +12,7 @@ function App() {
       <Routes>
         <Route index path='/' element={<Home/>}/>
         <Route exact path='/product' element={<ProductPage/>}/>
-        <Route path='/viewproduct/:id' element={<ViewProduct/>}/>
+        <Route path='/viewproduct/:productType/:productId/*' element={<ViewProduct/>}/>
       </Routes>
     </>
   )

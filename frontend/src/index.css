@@ -46,14 +46,14 @@ nav>h2 {
   width: 30vh;
   position: absolute;
   border: 1px solid #ccc;
-  max-height: 150px;
-  background-color: white;
-  z-index: 999;
+  height: auto;
+  z-index: 1;
 }
 
 .autocomplete-item {
   padding: 8px 12px;
   cursor: pointer;
+  background-color: rgb(255, 255, 255);
 }
 
 .autocomplete-item:hover {
@@ -76,7 +76,9 @@ nav>h2 {
 .filter-radio-btns {
   width: 3vh;
 }
-
+.selected{
+  background-color: rgb(163, 163, 163);
+}
 .cancel-btn {
   border-radius: 10px;
   background-color: rgb(159, 109, 15);
@@ -104,18 +106,20 @@ input[type="number"] {
   height: 5vh;
   border: 1px solid rgb(102, 101, 101);
 }
-.products>span{
+.products>button{
   border:none;
-  width: 18rem;
+  width: 17rem;
   max-height: 38vh;
   margin: 0vh 0vh 4vh 4vh;
+  padding: 0;
 }
+
 .card-img-top{
-  max-height: 30vh;
+  height: 30vh;
   object-fit: contain;
   transform: scale(0.9);
 }
-.products>span:hover{
+.products>button:hover{
   transform: scale(1.15);
   box-shadow: 1px 1px 1px 1px gray;
   .p-card-body{
@@ -137,4 +141,15 @@ input[type="number"] {
 .p-card-body{
   background-color: black;
   color: white;
+}
+.view_product>table{
+  width: 100%;
+}
+.gadget_details>table{
+  height: 100%;
+}
+.gadget_details>table>tbody>tr>td{
+  padding: 0.5em 1em;
+  font-size: 1.2rem;
+  font-family: Verdana, Geneva, Tahoma, sans-serif;
 }

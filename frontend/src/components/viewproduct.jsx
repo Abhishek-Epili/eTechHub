@@ -1,63 +1,37 @@
-import { useState, useEffect } from "react";
 import { useParams } from "react-router-dom";
+import ViewSmartPhone from "./viewgadgets/viewsmartphone";
+import ViewEarBuds from "./viewgadgets/viewearbuds";
+import ViewLaptop from "./viewgadgets/viewlaptop";
+import ViewHeadPhone from "./viewgadgets/viewheadphone";
+import { useState, useEffect } from "react";
 
 function ViewProduct() {
+    const { productType, productId } = useParams();
 
     const [gadget, setGadget] = useState('');
 
-    const { id } = useParams();
 
     useEffect(() => {
         const fetchGadgets = async () => {
-            const response = await fetch("http://localhost:4000/api/products/" + id)
+            const response = await fetch("http://localhost:4000/api/products/" + productId)
             const gadgetDetails = await response.json()
             setGadget(gadgetDetails)
-            console.log(gadgetDetails)
         }
         fetchGadgets();
-    }, [id])
+    }, [productId])
 
     return (
-        <>
-            {gadget && (
-                <>
-                    <h2>{gadget.gadgetName}</h2>
-                    <img src={gadget.gadgetImage} />
-                    <table>
-                        <tbody>
-                            <tr>
-                                <th>Brand</th>
-                                <td>{gadget.gadgetBrand}</td>
-                            </tr>
-                            <tr>
-                                <th>Name</th>
-                                <td>{gadget.gadgetName}</td>
-                            </tr>
-                            <tr>
-                                <th>Price</th>
-                                <td>{gadget.gadgetPrice}</td>
-                            </tr>
-                            <tr>
-                                <th>RAM</th>
-                                <td>{gadget.gadgetSpecs?.RAM}</td>
-                            </tr>
-                            <tr>
-                                <th>OS</th>
-                                <td>{gadget.gadgetSpecs?.OS}</td>
-                            </tr>
-                            <tr>
-                                <th>Internal Storage</th>
-                                <td>{gadget.gadgetSpecs?.Internal}</td>
-                            </tr>
-                            <tr>
-                                <th>Camera</th>
-                                <td>{gadget.gadgetSpecs?.Camera}</td>
-                            </tr>
-                        </tbody>
-                    </table>
-                </>
-            )}
-        </>
+        <div className="view_product">
+            <table>
+                <tbody>
+                    <tr>
+                        <td> <center> <img src={gadget.gadgetImage} /></center></td>
+                        {productType === "Smartphone" ? <ViewSmartPhone gadget={gadget} /> : productType === "Laptop" ? <ViewLaptop gadget={gadget} /> : productType === "Headphone" ? <ViewHeadPhone gadget={gadget} /> : productType === "Earbud" ? <ViewEarBuds gadget={gadget} /> : console.log("Not found")}
+                    </tr>
+                </tbody>
+            </table>
+            
+        </div>
     )
 }
 

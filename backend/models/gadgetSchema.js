@@ -15,10 +15,6 @@ const gadgetschema = new Schema({
         type:String,
         required:true
     },
-    gadgetId:{
-        type:String,
-        required:true
-    },
     gadgetImage:{
         type:String,
         required: true
@@ -28,40 +24,11 @@ const gadgetschema = new Schema({
         required:true
     },
     gadgetSpecs:{
-        type:Object,
-        required:true,
-        OS:{
-            type:String,
-            required:true
-        },
-        RAM:{
-            type:String,
-            required:true
-        },
-        Internal:{
-            type:String,
-            required:true
-        },
-        Camera:{
-            type:String,
-            required:true
-        }
+        type:Object
     },
-    gadgetReviews:{
-        type:Object,
-        required:true,
-        review_id:{
-            type:String,
-            required:true
-        },
-        review_by:{
-            type:String,
-            required:true
-        },
-        review_text:{
-            type:String,
-            required:true
-        }
+    rating:{
+        type:Number,
+        required: true
     }
 },
 {
