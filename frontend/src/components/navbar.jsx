@@ -33,7 +33,7 @@ function Navbar() {
   const handleSuggestionClick = (suggestion) => {
     setInputText(suggestion.gadgetName);
     setFilteredSuggestions([]);
-    location.href = "/viewproduct/" + suggestion._id;
+    location.href = "/viewproduct/" +suggestion.gadgetType+"/"+ suggestion._id;
   };
 
   const handleDocumentClick = (event) => {
@@ -102,43 +102,51 @@ function Navbar() {
     };
   }, []);
 
-  return (
-    <>
-      <nav>
-        <h2>eTech Hub</h2>
-        <a href="/">Home</a>
-        <a href="/product">Products</a>
-        <form>
-          <div ref={autocompleteRef}>
-            <input
-              type="text"
-              placeholder="&#xF002; Search"
-              className="search_bar"
-              value={inputText}
-              onChange={handleInputChange}
-              onKeyDown={handleKeyDown}
-              onKeyUp={handleKeyUp}
-              onFocus={handleFocus}
-            />
-            <div className="autocomplete-items">
-              {filteredSuggestions.length > 0 &&
+  // ... (previous code)
+
+return (
+  <>
+    <nav>
+      <h2>eTech Hub</h2>
+      <a href="/">Home</a>
+      <a href="/product">Products</a>
+      <form>
+        <div ref={autocompleteRef}>
+          <input
+            type="text"
+            placeholder="&#xF002; Search"
+            className="search_bar"
+            value={inputText}
+            onChange={handleInputChange}
+            onKeyDown={handleKeyDown}
+            onKeyUp={handleKeyUp}
+            onFocus={handleFocus}
+          />
+          <div className="autocomplete-items">
+            {inputText !== "" ? (
+              filteredSuggestions.length === 0 ? (
+                <div className="no-results">No results found</div>
+              ) : (
                 filteredSuggestions.map((suggestion, index) => (
                   <div
                     key={index}
-                    className={`autocomplete-item ${index === selectedSuggestionIndex ? "selected" : ""
-                      }`}
+                    className={`autocomplete-item ${
+                      index === selectedSuggestionIndex ? "selected" : ""
+                    }`}
                     onClick={() => handleSuggestionClick(suggestion)}
                   >
                     {suggestion.gadgetName}
                   </div>
-                ))}
-            </div>
+                ))
+              )
+            ) : null}
           </div>
-        </form>
-        <a href="">Login</a>
-      </nav>
-    </>
-  );
+        </div>
+      </form>
+      <a href="">Login</a>
+    </nav>
+  </>
+);
 }
 
 export default Navbar;

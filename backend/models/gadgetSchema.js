@@ -29,6 +29,10 @@ const gadgetschema = new Schema({
     rating:{
         type:Number,
         required: true
+    },
+    buy_links:{
+        type:Object,
+        required: true
     }
 },
 {

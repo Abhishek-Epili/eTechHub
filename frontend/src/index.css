@@ -50,7 +50,7 @@ nav>h2 {
   z-index: 1;
 }
 
-.autocomplete-item {
+.autocomplete-item,.no-results {
   padding: 8px 12px;
   cursor: pointer;
   background-color: rgb(255, 255, 255);
@@ -148,8 +148,22 @@ input[type="number"] {
 .gadget_details>table{
   height: 100%;
 }
-.gadget_details>table>tbody>tr>td{
+.gadget_details>center>table>tbody>tr>td,.specs_head{
   padding: 0.5em 1em;
   font-size: 1.2rem;
   font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+.gadget_image{
+  max-height: 50vh;
+  max-width: 80vh;
+}
+.buy_links{
+  border: 1px solid rgb(200, 200, 200);
+  padding: 1em 1em;
+}
+.buy_link_img{
+  width: 8vh;
+  border-radius: 10px;
+  margin: 0 2vh;
+  border: 1px solid rgb(205, 205, 205);
 }

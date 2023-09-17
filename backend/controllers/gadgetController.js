@@ -2,7 +2,7 @@ const Gadget = require('../models/gadgetSchema')
 const mongoose = require('mongoose')
 
 const getGadgets = async (req, res) => {
-  const projection = { _id: 1, gadgetBrand: 1, gadgetImage: 1, gadgetType: 1, gadgetName: 1, gadgetPrice: 1, rating: 1, createdAt: 1 };
+  const projection = { _id: 1, gadgetBrand: 1, gadgetImage: 1, gadgetType: 1, gadgetName: 1, gadgetPrice: 1, rating: 1, buy_links: 1, createdAt: 1 };
   try {
     const gadgets = await Gadget.find({},projection).sort({createdAt: 1});
     res.status(200).json(gadgets)
