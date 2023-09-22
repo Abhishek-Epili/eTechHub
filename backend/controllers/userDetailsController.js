@@ -1,5 +1,4 @@
 const UserDetails = require("../models/userDetailsSchema")
-const mongoose = require("mongoose")
 
 const createUser = async (req, res) => {
     const { username, password, contact } = req.body

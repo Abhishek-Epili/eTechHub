@@ -17,7 +17,6 @@ function App() {
       })
     }
 
-    gapi.load('client:auth2',start)
   })
 
   return (
@@ -26,7 +25,7 @@ function App() {
       <Routes>
         <Route index path='/' element={<Home />} />
         <Route exact path='/product' element={<ProductPage />} />
-        <Route path='/viewproduct/:productType/:productId/*' element={<ViewProduct />} />
+        <Route path='/viewproduct/:productType/:gadget_id/*' element={<ViewProduct />} />
         <Route path='/login' element={<LoginPage />} />
       </Routes>
     </>

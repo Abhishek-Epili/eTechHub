@@ -18,8 +18,6 @@ function Navbar() {
       }
     };
     fetchGadgets();
-    const cookieValue = Cookies.get('profile_picture');
-    setProfilePicture(cookieValue)
   }, [profilePicture]);
 
   const handleInputChange = (event) => {
@@ -68,6 +66,8 @@ function Navbar() {
   const handleLogout = () => {
     setProfilePicture(undefined)
     Cookies.remove('profile_picture'); 
+    Cookies.remove('profile_username'); 
+    Cookies.remove('profile_name'); 
   }
 
   const handleKeyDown = (event) => {

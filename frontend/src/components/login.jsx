@@ -1,5 +1,5 @@
 import "./css/loginpage.css"
-import { useState, useEffect } from "react"
+import { useState } from "react"
 import axios from "axios";
 import Cookies from 'js-cookie';
 import GoogleLogin from "react-google-login";
@@ -12,9 +12,10 @@ function LoginPage() {
     const client_id = "463364694212-9sunroepoi627r4p98o8i67nl4c7f24p.apps.googleusercontent.com";
 
     function onSuccess(res) {
-        console.log("Success: ", res.profileObj)
         Cookies.set('profile_picture', res.profileObj.imageUrl, { expires: 7 });
-        location.href="/"
+        Cookies.set('profile_username', res.profileObj.email, { expires: 7 });
+        Cookies.set('profile_name', res.profileObj.givenName +" "+res.profileObj.familyName , { expires: 7 });
+        location.href = "/"
     }
 
     function onFailure(res) {
@@ -46,17 +47,22 @@ function LoginPage() {
             <div className="login-container">
                 <h2>Login</h2>
                 <h3>{errorMsg}</h3>
-                <form id="login-form">
+                <form id="login-form" onSubmit={handleSubmit}>
                     <div className="form-group">
                         <label htmlFor="username">Username:</label>
-                        <input type="text" id="username" name="username" onChange={(e) => { setUsername(e.target.value) }} value={username} required />
+                        <input type="text"
+                            id="username"
+                            name="username"
+                            onChange={(e) => { setUsername(e.target.value) }}
+                            value={username}
+                            required />
                     </div>
                     <div className="form-group">
                         <label htmlFor="password">Password:</label>
                         <input type="password" id="password" name="password" onChange={(e) => { setPassword(e.target.value) }} value={password} required />
                     </div>
                     <div className="form-group">
-                        <button type="submit" onClick={handleSubmit}>Login</button>
+                        <button type="submit">Login</button>
                     </div>
                     <div id="signInDiv">
                         <GoogleLogin
