@@ -1,0 +1,31 @@
+
+.view_product>table{
+    width: 100%;
+  }
+  .product_details{
+    margin: 1em 0 1em 0;
+  }
+  .gadget_details>table{
+    height: 100%;
+  }
+  .gadget_details>center>table>tbody>tr>td,.specs_head{
+    padding: 0.5em 1em;
+    font-size: 1.2rem;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+  }
+  .gadget_image{
+    max-height: 50vh;
+    max-width: 80vh;
+    border: 1px solid black;
+  }
+  .buy_links{
+    border: 1px solid rgb(200, 200, 200);
+    padding: 1em 1em;
+  }
+  .buy_link_img{
+    width: 8vh;
+    border-radius: 10px;
+    margin: 0 2vh;
+    border: 1px solid rgb(205, 205, 205);
+  }
+  

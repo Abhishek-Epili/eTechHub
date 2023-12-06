@@ -1,0 +1,120 @@
+.login-element {
+  display: flex;
+  align-items: center;
+  height: 10vh;
+  width: 15vh;
+  justify-content: center;
+}
+
+.login-button,
+.user-button {
+  color: #007bff;
+  border: none;
+  padding: 10px 20px;
+  cursor: pointer;
+  border-radius: 4px;
+}
+
+
+
+.dropdown li:hover {
+  background-color: #f5f5f5;
+}
+
+.user_img {
+  height: 10vh;
+  border-radius: 50%;
+  padding: 2vh 2vh;
+}
+
+
+.user-dropdown {
+  position: relative;
+  display: inline-block;
+  margin-right: 10px;
+}
+
+.dropdown {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  box-shadow: 0px 4px 6px rgba(0, 0, 0, 0.1);
+  border: 1px solid #ccc;
+  border-radius: 4px;
+  list-style: none;
+  padding: 0;
+  display: none;
+}
+
+.user-dropdown:hover .dropdown {
+  display: block;
+}
+
+.dropdown li {
+  padding: 10px;
+  width: 15vh;
+  cursor: pointer;
+}
+
+nav {
+  display: flex;
+  align-items: center;
+  justify-content: right;
+  height: 10vh;
+  background-color: rgb(213, 210, 210);
+}
+
+nav>a {
+  text-decoration: none;
+  color: black;
+  border-radius: 15px;
+  height: 5vh;
+  margin: 2em;
+  width: 10vh;
+  text-align: center;
+  padding: 5px 5px;
+}
+
+nav>a:hover {
+  background-color: rgb(218, 14, 218);
+  color: rgb(251, 249, 249);
+}
+
+body {
+  margin: 0;
+  font-family: Arial, Helvetica, sans-serif;
+}
+
+nav>h2 {
+  margin-right: auto;
+  margin-left: 1em;
+}
+
+.search_bar {
+  font-size: 0.85em;
+  border: 1px medium rgb(237, 237, 237);
+  font-family: Arial, FontAwesome;
+  width: 30vh;
+  border: none;
+  height: 4.5vh;
+  border-radius: 5px;
+}
+
+.autocomplete-items {
+  width: 30vh;
+  position: absolute;
+  border: 1px solid #ccc;
+  height: auto;
+  z-index: 1;
+}
+
+.autocomplete-item,
+.no-results {
+  padding: 8px 12px;
+  cursor: pointer;
+  background-color: rgb(255, 255, 255);
+}
+
+.autocomplete-item:hover {
+  background-color: #6f6f6f;
+}

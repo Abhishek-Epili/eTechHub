@@ -1,6 +1,6 @@
 .reviews-container {
     max-width: 90%;
-    margin: 0 auto;
+    margin: 1em auto;
     padding: 20px;
     background-color: #fff;
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
@@ -62,6 +62,11 @@ h1 {
     border-radius: 5px;
     cursor: pointer;
 }
+.review-rating {
+    padding: 5px 10px;
+    font-size: 18px;
+    font-weight: bold;
+}
 .review-header-input {
     width: 100%;
     padding: 10px;
@@ -71,3 +76,18 @@ h1 {
     font-size: 16px;
     /* Add any additional styling you desire */
 }
+
+.star-rating {
+    display: inline-block;
+  }
+  
+  .star {
+    font-size: 24px; /* Adjust the size of the stars */
+    color: gray; /* Adjust the default color of the stars */
+    cursor: pointer;
+  }
+  
+  .star.checked {
+    color: gold; /* Adjust the color of the selected stars */
+  }
+  

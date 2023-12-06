@@ -4,13 +4,15 @@ import ViewEarBuds from "./viewgadgets/viewearbuds";
 import ViewLaptop from "./viewgadgets/viewlaptop";
 import ViewHeadPhone from "./viewgadgets/viewheadphone";
 import { useState, useEffect } from "react";
+import { FaStar } from 'react-icons/fa';
 import axios from "axios";
 import Cookies from "js-cookie";
 import "./css/reviews.css"
+import "./css/viewproduct.css"
 
 function ViewProduct() {
     const { productType, gadget_id } = useParams();
-
+    const [ratingValue, setRatingValue] = useState(0);
     const [reviews, setReviews] = useState([])
     const [review_header, setReviewHeader] = useState('');
     const [review_msg, setReviewText] = useState('');
@@ -23,7 +25,7 @@ function ViewProduct() {
             setGadget(gadgetDetails)
         }
         const fetchReviews = async () => {
-            const response = await fetch("http://localhost:4000/api/reviews/"+gadget_id)
+            const response = await fetch("http://localhost:4000/api/reviews/" + gadget_id)
             const reviews = await response.json()
             setReviews(reviews)
         }
@@ -31,13 +33,18 @@ function ViewProduct() {
         fetchGadget();
     }, [])
 
-    function addReview() {
+    function handleStarClick(selectedRating) {
+        setRatingValue(selectedRating === ratingValue ? 0 : selectedRating);
+    };
+
+    function addReview(e) {
         if (Cookies.get("profile_name") === undefined) {
+            e.preventDefault();
             alert("Login First!")
             location.href = "/login"
         }
         else {
-            const rating = 5
+            const rating = ratingValue;
             const review_by = {
                 "name": Cookies.get("profile_name"),
                 "username": Cookies.get("profile_username")
@@ -49,13 +56,12 @@ function ViewProduct() {
                 review_msg,
                 review_by
             })
-            location.reload();
         }
     }
 
     return (
         <div className="view_product">
-            <table>
+            <table className="product_details">
                 <tbody>
                     <tr>
                         <td> <center> <img className="gadget_image" src={gadget.gadgetImage} /></center></td>
@@ -98,11 +104,24 @@ function ViewProduct() {
                 </div>
             }
             <div className="reviews-container">
-                <h1>Product Reviews</h1>
+                {
+                    reviews.length !== 0 ? <h1>Product Reviews</h1> : <h1>No reviews currently</h1>
+                }
+
                 <div className="reviews">
                     {
                         reviews && reviews.map(review => (
                             <div key={review._id} className="review">
+                                <div className="review-rating">
+                                    <div className="star-rating">
+                                        {[1, 2, 3, 4, 5].map((star) => (
+                                            <FaStar
+                                                key={star}
+                                                className={star <= review.rating ? 'star checked' : 'star'}
+                                            />
+                                        ))}
+                                    </div>
+                                </div>
                                 <p className="review-author"> {review.review_by.name}</p>
                                 <p className="review-header">About: {review.review_header}</p>
                                 <p className="review-text">Review: {review.review_msg}</p>
@@ -110,22 +129,34 @@ function ViewProduct() {
                         ))
                     }
                 </div>
-                <div className="add-review">
+                <form className="add-review" onSubmit={addReview}>
                     <h1>Add a Review</h1>
+                    <div className="star-rating">
+                        {[1, 2, 3, 4, 5].map((star) => (
+                            <FaStar
+                                key={star}
+                                className={star <= ratingValue ? 'star checked' : 'star'}
+                                onClick={() => handleStarClick(star)}
+                            />
+                        ))}
+                    </div>
+                    <br />
                     <input type="text"
                         id="new-review-header"
                         placeholder="Review Header"
                         className="review-header-input"
                         value={review_header}
-                        onChange={(e) => { setReviewHeader(e.target.value) }} />
+                        onChange={(e) => { setReviewHeader(e.target.value) }}
+                        required />
                     <textarea
                         id="new-review-text"
                         rows="4"
                         placeholder="Write your review here..."
                         value={review_msg}
-                        onChange={(e) => { setReviewText(e.target.value) }}></textarea>
-                    <button onClick={addReview} id="submit-review">Submit Review</button>
-                </div>
+                        onChange={(e) => { setReviewText(e.target.value) }}
+                        required />
+                    <button id="submit-review">Submit Review</button>
+                </form>
             </div>
         </div>
     )

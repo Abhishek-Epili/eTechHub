@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from "react";
 import Card from "./card";
+import "./css/products.css"
 
 function ProductPage() {
     // State variables
