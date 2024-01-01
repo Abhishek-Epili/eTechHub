@@ -117,8 +117,7 @@ function Navbar() {
     <>
       <nav>
         <h2>eTech Hub</h2>
-        <a href="/">Home</a>
-        <a href="/product">Products</a>
+        <a href="/">Products</a>
         <form>
           <div ref={autocompleteRef}>
             <input

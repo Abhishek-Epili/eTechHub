@@ -11,17 +11,22 @@ h1 {
     margin-bottom: 20px;
 }
 
-.reviews {
+.reviews-section {
     border-top: 1px solid #ddd;
     margin-top: 20px;
+    display: grid;
+    grid-template-columns: auto auto auto auto;
+}  
+.reviews{
+    grid-column-start: 1;
+    grid-column-end: 4;
 }
-
 .review {
     box-shadow: 0 0 10px rgba(0, 0, 0, 0.2);
     padding: 10px 0;
     margin-top: 10px;
     border-radius: 5px;
-    max-width: 60%;
+    max-width: 95%;
 }
 .review-header {
     font-weight: bold;
@@ -67,7 +72,7 @@ h1 {
     font-size: 18px;
     font-weight: bold;
 }
-.review-header-input {
+.review-header-input, .reveiw-search {
     width: 100%;
     padding: 10px;
     border: 1px solid #ddd;
@@ -76,7 +81,10 @@ h1 {
     font-size: 16px;
     /* Add any additional styling you desire */
 }
-
+.reveiw-search {
+    margin-top: 10px;
+    width: 80%;
+}
 .star-rating {
     display: inline-block;
   }
@@ -89,5 +97,40 @@ h1 {
   
   .star.checked {
     color: gold; /* Adjust the color of the selected stars */
+  }
+
+  
+  .review-filter-container {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 10px;
+    align-items: center;
+  }
+  
+  /* Add more styling based on your design preferences */
+  /* For example: */
+  .review-filter-container label {
+    font-weight: bold;
+  }
+  
+  .review-filter-container select,
+  .review-filter-container input,
+  .review-filter-container button {
+    width: 60%; /* Set a width for better alignment */
+    padding: 5px;
+    font-size: 14px;
+  }
+  
+  .review-filter-container button {
+    padding: 8px;
+    background-color: #007bff;
+    color: #fff;
+    border: none;
+    cursor: pointer;
+  }
+  
+  .review-filter-container button:hover {
+    background-color: #0056b3;
   }
   

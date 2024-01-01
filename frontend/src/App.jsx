@@ -23,8 +23,7 @@ function App() {
     <>
       <Navbar />
       <Routes>
-        <Route index path='/' element={<Home />} />
-        <Route exact path='/product' element={<ProductPage />} />
+        <Route index path='/' element={<ProductPage />} />
         <Route path='/viewproduct/:productType/:gadget_id/*' element={<ViewProduct />} />
         <Route path='/login' element={<LoginPage />} />
       </Routes>

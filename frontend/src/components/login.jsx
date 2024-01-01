@@ -1,6 +1,4 @@
 import "./css/loginpage.css"
-import { useState } from "react"
-import axios from "axios";
 import Cookies from 'js-cookie';
 import GoogleLogin from "react-google-login";
 
@@ -11,7 +9,7 @@ function LoginPage() {
     function onSuccess(res) {
         Cookies.set('profile_picture', res.profileObj.imageUrl, { expires: 7 });
         Cookies.set('profile_username', res.profileObj.email, { expires: 7 });
-        Cookies.set('profile_name', res.profileObj.givenName +" "+res.profileObj.familyName , { expires: 7 });
+        Cookies.set('profile_name', res.profileObj.givenName + " " + res.profileObj.familyName, { expires: 7 });
         location.href = "/"
     }
 
@@ -19,14 +17,14 @@ function LoginPage() {
         console.log("Failed: " + res)
     }
 
-    
+
     return (
         <>
             <div className="login-container">
-            <br/>
+                <br />
                 <h1>Welcome !</h1>
                 <p>Please Login using your Google Account</p>
-                <br/>
+                <br />
                 <form id="login-form">
                     <div id="signInDiv">
                         <GoogleLogin
@@ -38,7 +36,7 @@ function LoginPage() {
                             isSignedIn={false}
                         />
                     </div>
-                    <br/><br/>
+                    <br /><br />
                 </form>
             </div>
         </>
