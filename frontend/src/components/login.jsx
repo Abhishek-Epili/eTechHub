@@ -1,15 +1,27 @@
 import "./css/loginpage.css"
 import Cookies from 'js-cookie';
 import GoogleLogin from "react-google-login";
+import axios from "axios";
 
 function LoginPage() {
 
     const client_id = "463364694212-9sunroepoi627r4p98o8i67nl4c7f24p.apps.googleusercontent.com";
 
-    function onSuccess(res) {
-        Cookies.set('profile_picture', res.profileObj.imageUrl, { expires: 7 });
-        Cookies.set('profile_username', res.profileObj.email, { expires: 7 });
-        Cookies.set('profile_name', res.profileObj.givenName + " " + res.profileObj.familyName, { expires: 7 });
+    async function onSuccess(res) {
+        const username = res.profileObj.givenName + " " + res.profileObj.familyName;
+        const email = res.profileObj.email;
+        const profile_url = res.profileObj.imageUrl;
+        Cookies.set('profile_picture', profile_url, { expires: 7 });
+        Cookies.set('profile_username', email, { expires: 7 });
+        Cookies.set('profile_name', username, { expires: 7 });
+        Cookies.set('logged_in', 'user');
+        const reqData = {
+            username: username,
+            email: email,
+            profile_url: profile_url
+        }
+        console.log(reqData)
+        const response = await axios.post("http://localhost:4000/api/users/addUser", reqData);
         location.href = "/"
     }
 
@@ -28,6 +40,7 @@ function LoginPage() {
                 <form id="login-form">
                     <div id="signInDiv">
                         <GoogleLogin
+                            className="google-login-button"
                             clientId={client_id}
                             buttonText="Continue with Google"
                             onSuccess={onSuccess}

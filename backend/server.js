@@ -6,6 +6,7 @@ const mongoose = require("mongoose");
 const gadgetRoutes = require('./route/gadgetRoutes')
 const userRoutes = require('./route/userRoutes')
 const reviewRoutes = require('./route/reviewRoutes')
+const getCountRoutes = require('./route/getCountRoutes')
 
 const app = express()
 
@@ -20,6 +21,7 @@ app.use((req, res, next) => {
 app.use('/api/products', gadgetRoutes)
 app.use('/api/users', userRoutes)
 app.use('/api/reviews', reviewRoutes)
+app.use('/api/getCount',getCountRoutes)
 
 mongoose.connect(process.env.MONGO_URI, { useNewUrlParser: true }).
     then(() => {

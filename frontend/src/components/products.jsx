@@ -16,24 +16,21 @@ function ProductPage() {
     // Fetch gadgets on component mount
     useEffect(() => {
         const fetchGadgets = async () => {
+            console.log("OK")
             const response = await fetch("http://localhost:4000/api/products");
             const json = await response.json();
             if (response.ok) {
                 setGadgets(json);
                 setDisplayedGadgets(json);
             }
+            if (json.length > 0) {
+                const tempNames = json.map(gadget => gadget.gadgetType);
+                const uniqueArray = [...new Set(tempNames)];
+                setGadgetTypes(uniqueArray);
+            }
         };
         fetchGadgets();
     }, []);
-
-    // Update gadget types when gadgets change
-    useEffect(() => {
-        if (gadgets.length > 0) {
-            const tempNames = gadgets.map(gadget => gadget.gadgetType);
-            const uniqueArray = [...new Set(tempNames)];
-            setGadgetTypes(uniqueArray);
-        }
-    }, [gadgets]);
 
     // Update displayed gadgets based on filter, price, and price order
     const updateDisplayedGadgets = (filterType, priceOrder, price, sortType, sortOrder) => {

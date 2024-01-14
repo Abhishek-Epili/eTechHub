@@ -8,7 +8,22 @@
     margin: 10% 20%;
 }
 
-
+.google-login-button {
+    /* Your styles here */
+    box-shadow: none !important;
+    border: solid 1px rgba(0, 0, 0, 0.352) !important;
+    border-radius: 5px !important;
+    width: 35% !important;
+    justify-content: center !important;
+    color: black !important;
+    font-size: 16px !important;
+}
+.google-login-button:hover{
+    background-color: rgb(228, 228, 228) !important;
+}
+.google-login-button>div{
+    background: none !important;
+}
 @media screen and (max-width: 600px) {
     .login-container {
         margin: 10px;

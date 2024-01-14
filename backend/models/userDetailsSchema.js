@@ -7,12 +7,12 @@ const userschema = new Schema({
         type:String,
         required: true
     },
-    password:{
+    email:{
         type:String,
         required: true
     },
-    contact:{
-        type: Number,
+    profile_url:{
+        type: String,
         required: true
     },
 },{

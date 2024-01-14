@@ -16,6 +16,7 @@ function ViewProduct() {
     const { productType, gadget_id } = useParams();
     const [ratingValue, setRatingValue] = useState(0);
     const [reviews, setReviews] = useState([])
+    const [displayedReviews, setDisplayedReviews] = useState([])
     const [review_header, setReviewHeader] = useState('');
     const [review_msg, setReviewText] = useState('');
     const [gadget, setGadget] = useState({});
@@ -30,10 +31,34 @@ function ViewProduct() {
             const response = await fetch("http://localhost:4000/api/reviews/" + gadget_id)
             const reviews = await response.json()
             setReviews(reviews)
+            setDisplayedReviews(reviews)
         }
-        fetchReviews();
         fetchGadget();
+        fetchReviews();
     }, [])
+
+    function handleSearchChange(text){
+        setDisplayedReviews(reviews.filter(review => review.review_header.toLowerCase().startsWith(text)))
+    }
+
+    function handleFilterChange(filter){
+        if(filter=="negative"){
+            console.log(reviews)
+            const filteredArray = reviews.filter(review => review.rating < 3);
+            setDisplayedReviews(filteredArray)
+        }
+        else if(filter=="positive"){
+            const filteredArray = reviews.filter(review => review.rating > 2);
+            setDisplayedReviews(filteredArray)
+        }
+        else if(filter=="all"){
+            setDisplayedReviews(reviews)
+        }
+    }
+
+    function handleDisableClick(){
+        setDisplayedReviews(reviews)
+    }
 
     function handleStarClick(selectedRating) {
         setRatingValue(selectedRating === ratingValue ? 0 : selectedRating);
@@ -47,6 +72,10 @@ function ViewProduct() {
         }
         else {
             const rating = ratingValue;
+            if(rating==0){
+                alert("Select rating!")
+                return
+            }
             const review_by = {
                 "name": Cookies.get("profile_name"),
                 "username": Cookies.get("profile_username")
@@ -107,13 +136,17 @@ function ViewProduct() {
             }
             <div className="reviews-container">
                 {
-                    reviews.length !== 0 ? <h1>Product Reviews</h1> : <h1>No reviews currently</h1>
+                    displayedReviews.length !== 0 ? <><h1>Product Reviews</h1><div className="reviews-section">
+                    <Review reviews={displayedReviews}/>
+                    <ReviewFilter 
+                    handleFilterChangeMain = {handleFilterChange}
+                    handleDisableClick = {handleDisableClick}
+                    handleSearchChangeMain = {handleSearchChange}
+                    />
+                </div></> : <h1>No reviews currently</h1>
                 }
 
-                <div className="reviews-section">
-                    <Review reviews={reviews}/>
-                    <ReviewFilter/>
-                </div>
+                
                 <form className="add-review" onSubmit={addReview}>
                     <h1>Add a Review</h1>
                     <div className="star-rating">
