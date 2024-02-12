@@ -20,8 +20,6 @@ const reviewSchema = new Schema({
         required: true
     },
     review_by:{
-        type:Object,
-        required: true,
         name:{
             type: String,
             required: true
@@ -30,9 +28,14 @@ const reviewSchema = new Schema({
             type: String,
             required: true
         }
-    }
+    },
+    reported: {
+        type: String, // Assuming "reported" can have values like "yes" or "no"
+        default: "no" // Set default value to "no" if not provided
+    },
+    report_txt: String
 },{
     timestamps: true
 })
 
-module.exports = mongoose.model("Reviews",reviewSchema)
+module.exports = mongoose.model("Reviews", reviewSchema)

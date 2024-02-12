@@ -134,3 +134,56 @@ h1 {
     background-color: #0056b3;
   }
   
+  .report-link{
+    float: right;
+    margin-right: 10px;
+  }
+  
+.floating-window {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    background-color: white;
+    border: 1px solid #ccc;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.2);
+    padding: 20px;
+    z-index: 1000;
+    width: 400px; /* Set the width as per your requirement */
+}
+
+.floating-content {
+    text-align: center;
+}
+
+.floating-content h2 {
+    margin-top: 0;
+}
+
+.floating-content textarea {
+    width: 100%;
+    height: 100px; /* Set the height as per your requirement */
+    margin-bottom: 10px;
+    padding: 5px;
+    resize: vertical; /* Allow vertical resizing */
+}
+
+.floating-content button {
+    margin-right: 10px;
+}
+
+.report-link {
+    cursor: pointer; /* Show pointer cursor when hovering over the report link */
+}
+
+.star-rating {
+    display: flex; /* Ensure stars are displayed in a row */
+}
+
+.star {
+    color: #ffd700; /* Default color for stars */
+}
+
+.checked {
+    color: #f7d220; /* Color for checked stars */
+}

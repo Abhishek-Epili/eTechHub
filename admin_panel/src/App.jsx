@@ -2,15 +2,17 @@ import { useState } from 'react'
 import AdminLogin from './components/adminLogin'
 import { Routes, Route } from 'react-router-dom'
 import AdminPanel from './components/adminPanel'
+import AddGadget from './components/addGadget'
+import Dashboard from './components/dashboard'
 
 function App() {
 
   return (
     <>
-      <Routes>
-        <Route index path='/' element={<AdminLogin/>}/>
-        <Route path='/adminpanel' element={<AdminPanel/>}/>
-      </Routes>
+    <AdminPanel/> 
+    <Routes>
+      <Route path="/adminlogin" element={<AdminLogin/>}/>
+    </Routes>
     </>
   )
 }

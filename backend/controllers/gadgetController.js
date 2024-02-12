@@ -29,10 +29,10 @@ const getGadget = async (req, res) => {
 }
 
 const createGadget = async (req, res) => {
-  const {gadgetType, gadgetBrand, gadgetName, gadgetImage, gadgetPrice, gadgetSpecs, rating} = req.body
+  const {gadgetType, gadgetBrand, gadgetName, gadgetImage, gadgetPrice, gadgetSpecs, rating, buy_links} = req.body
 
   try {
-    const gadget = await Gadget.create({ gadgetType, gadgetBrand, gadgetName, gadgetImage, gadgetPrice, gadgetSpecs, rating })
+    const gadget = await Gadget.create({ gadgetType, gadgetBrand, gadgetName, gadgetImage, gadgetPrice, gadgetSpecs, rating, buy_links })
     res.status(200).json(gadget)
   } catch (error) {
     res.status(400).json({ error: error.message })

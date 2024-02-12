@@ -1,5 +1,6 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
+import "../css/adminPanel.css"
 
 function Dashboard() {
 
@@ -14,8 +15,8 @@ function Dashboard() {
             const productResponse = await axios.get("http://localhost:4000/api/getCount/getProductCount");
 
             setLoggedInUsers(userResponse.data)
-            setProductsCount(reviewResponse.data)
-            setReviewsCount(productResponse.data)
+            setProductsCount(productResponse.data)
+            setReviewsCount(reviewResponse.data)
         }
         getCount();
     },[])

@@ -23,12 +23,8 @@ function ViewLaptop({ gadget }) {
                 <td>{gadget.gadgetSpecs?.OS}</td>
             </tr>
             <tr>
-                <td><b>Internal Storage</b></td>
+                <td><b>Secondary Storage</b></td>
                 <td>{gadget.gadgetSpecs?.Internal}</td>
-            </tr>
-            <tr>
-                <td><b>Camera</b></td>
-                <td>{gadget.gadgetSpecs?.Camera}</td>
             </tr>
             <tr>
                 <td><b>Processor</b></td>
