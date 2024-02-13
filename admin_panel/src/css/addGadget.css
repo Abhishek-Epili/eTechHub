@@ -25,7 +25,7 @@
     width: 100%;
   }
   
-  button {
+  .button {
     background-color: #4caf50;
     color: white;
     padding: 10px 15px;
@@ -34,10 +34,10 @@
     margin-top: 10px;
   }
   
-  button:hover {
+  .button:hover {
     background-color: #45a049;
   }
-  
+   
   .add-button {
     background-color: #3498db;
     color: #fff;

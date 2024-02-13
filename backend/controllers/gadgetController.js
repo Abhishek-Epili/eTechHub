@@ -28,6 +28,24 @@ const getGadget = async (req, res) => {
   return res.status(200).json(gadget)
 }
 
+const updateGadget = async (req, res) => {
+  const { id } = req.params
+  const {gadgetType, gadgetBrand, gadgetName, gadgetImage, gadgetPrice, gadgetSpecs, rating, buy_links} = req.body
+  if (!mongoose.Types.ObjectId.isValid(id)) {
+    return res.status(404).json({ error: 'No such gadget' })
+  }
+  
+  const gadget = await Gadget.findByIdAndUpdate(id,
+    {gadgetType, gadgetBrand, gadgetName, gadgetImage, gadgetPrice, gadgetSpecs, rating, buy_links},
+    { new: true });
+
+  if (!gadget) {
+    return res.status(404).json({ error: 'No such gadget' })
+  }
+
+  return res.status(200).json(gadget)
+}
+
 const createGadget = async (req, res) => {
   const {gadgetType, gadgetBrand, gadgetName, gadgetImage, gadgetPrice, gadgetSpecs, rating, buy_links} = req.body
 
@@ -42,5 +60,6 @@ const createGadget = async (req, res) => {
 module.exports = {
   getGadgets,
   getGadget,
-  createGadget
+  createGadget,
+  updateGadget
 }

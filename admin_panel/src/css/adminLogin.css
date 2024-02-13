@@ -46,7 +46,7 @@ input {
   border-radius: 4px;
 }
 
-button {
+.login-btn {
   background-color: #007bff;
   color: #fff;
   padding: 10px;
@@ -55,7 +55,7 @@ button {
   cursor: pointer;
 }
 
-button:hover {
+.login-btn:hover {
   background-color: #0056b3;
 }
 

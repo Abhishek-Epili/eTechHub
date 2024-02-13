@@ -119,6 +119,7 @@ const AddGadget = () => {
         ))}
         
         <button
+          className="button"
           type="button"
           onClick={() => handleAddField("gadgetSpecs")}
         >
@@ -142,11 +143,11 @@ const AddGadget = () => {
             />
           </div>
         ))}
-        <button type="button" onClick={() => handleAddField("buy_links")}>
+        <button className="button" type="button" onClick={() => handleAddField("buy_links")}>
           + Add Buy Link
         </button>
 
-        <button type="submit">Submit</button>
+        <button className="button" type="submit">Submit</button>
       </form>
     </div>
   );

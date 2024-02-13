@@ -1,0 +1,41 @@
+.reports {
+    margin: 20px;
+}
+
+.reports h2 {
+    font-size: 24px;
+    margin-bottom: 10px;
+}
+
+.reports ul {
+    list-style-type: none;
+    padding: 0;
+}
+
+.reports li {
+    border: 1px solid #ccc;
+    border-radius: 5px;
+    margin-bottom: 10px;
+    padding: 10px;
+}
+
+.reports li div {
+    margin-bottom: 5px;
+}
+
+.reports li div:first-child {
+    font-weight: bold;
+}
+
+.loading {
+    text-align: center;
+    font-size: 18px;
+    margin-top: 50px;
+}
+
+.error {
+    color: red;
+    text-align: center;
+    font-size: 18px;
+    margin-top: 50px;
+}

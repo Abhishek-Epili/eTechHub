@@ -42,11 +42,6 @@ function Dashboard() {
                 </div>
             </div>
 
-            {/* Reports Section (you can add more sections as needed) */}
-            <div id="reports" className="reports-section">
-                <h2>Reports</h2>
-                {/* Add your report components here */}
-            </div>
         </div>
     )
 }

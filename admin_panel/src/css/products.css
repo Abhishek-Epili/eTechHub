@@ -1,0 +1,77 @@
+.card-body {
+    display: block;
+  }
+  .filter-sort-body>*{
+    margin: 5px 0px 5px 0px;
+  }
+  .filter-btn,
+  .sort-btn {
+    width: 100%;
+    text-align: left;
+    background-color: #6f6f6f
+  }
+  
+  .filter-radio-btns {
+    width: 3vh;
+  }
+  .selected{
+    background-color: rgb(163, 163, 163);
+  }
+  .cancel-btn {
+    border-radius: 10px;
+    background-color: rgb(159, 109, 15);
+    color: white;
+    border: none;
+    width: auto;
+    height: auto;
+    padding: 0.4em;
+  }
+  
+  .cancel-btn:hover {
+    background-color: rgb(191, 156, 90);
+    color: black;
+  }
+  
+  select {
+    border: 1px solid rgb(102, 101, 101);
+    border-radius: 5px;
+    height: 5vh;
+    text-align: center;
+  }
+  
+  input[type="number"] {
+    border-radius: 5px;
+    height: 5vh;
+    border: 1px solid rgb(102, 101, 101);
+  }
+  
+  .card-img-top{
+    height: 30vh;
+    object-fit: contain;
+    transform: scale(0.9);
+  }
+  .product-card:hover{
+    transform: scale(1.15);
+    box-shadow: 1px 1px 1px 1px gray;
+    .p-card-body{
+      background-color: rgb(45, 43, 43);
+    }
+  }
+  .product-card{
+    margin: 0;
+    border:none;
+    width: 17rem;
+    max-height: 38vh;
+    margin: 0vh 0vh 4vh 4vh;
+    padding: 0;
+  }
+  .products {
+    display: flex;
+    flex-wrap: wrap;
+  }
+  
+
+  .p-card-body{
+    background-color: black;
+    color: white;
+  }
