@@ -7,6 +7,7 @@ import Dashboard from './components/dashboard'
 import ViewReport from './components/viewReport'
 import ViewGadget from './components/viewGadget'
 import UpdateGadget from './components/updateGadget'
+import VerifiedPurchase from './components/verifiedPurchases'
 
 function App() {
 
@@ -20,6 +21,7 @@ function App() {
         <Route path='/reports' element={<ViewReport />} />
         <Route path='/viewgadget' element={<ViewGadget />} />
         <Route path="/adminlogin" element={<AdminLogin />} />
+        <Route path="/verifiedpurchase" element={<VerifiedPurchase />} />
         <Route path="/updategadget/:gadget_id" element={<UpdateGadget />} />
       </Routes>
       </div>

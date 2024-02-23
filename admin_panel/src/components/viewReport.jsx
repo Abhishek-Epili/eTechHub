@@ -39,10 +39,11 @@ function ViewReport() {
                 <ul>
                     {reports.map(report => (
                         <li key={report._id}>
-                            <div>{report.review_by.name}</div>
-                            <div>{report.review_header}</div>
-                            <div>{report.review_msg}</div>
-                            <div>{report.report_txt}</div>
+                            <div>Review By: {report.review_by.name}</div>
+                            <div>Review Header: {report.review_header}</div>
+                            <div>Review Text: {report.review_msg}</div><br/>
+                            <div>Review Reported By: {report.report.reported_by}</div>
+                            <div>Report Text: {report.report.report_txt}</div>
                             {/* Add more report fields as needed */}
                         </li>
                     ))}

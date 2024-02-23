@@ -20,6 +20,8 @@ function ViewProduct() {
     const [review_header, setReviewHeader] = useState('');
     const [review_msg, setReviewText] = useState('');
     const [gadget, setGadget] = useState({});
+    const [verifiedUser, setVerifiedUser] = useState(false);
+    const [file, setFile] = useState(null);
 
     useEffect(() => {
         const fetchGadget = async () => {
@@ -65,30 +67,56 @@ function ViewProduct() {
     };
 
     function addReview(e) {
+    
+        // Check if the user is logged in
         if (Cookies.get("profile_name") === undefined) {
-            e.preventDefault();
-            alert("Login First!")
-            location.href = "/login"
+            alert("Login First!");
+            window.location.href = "/login";
+            return; // Terminate the function
         }
-        else {
-            const rating = ratingValue;
-            if(rating==0){
-                alert("Select rating!")
-                return
-            }
-            const review_by = {
-                "name": Cookies.get("profile_name"),
-                "username": Cookies.get("profile_username")
-            }
-            const review = axios.post("http://localhost:4000/api/reviews", {
-                gadget_id,
-                rating,
-                review_header,
-                review_msg,
-                review_by
-            })
+    
+        // Check if rating is selected
+        if (ratingValue === 0) {
+            alert("Select rating!");
+            return; // Terminate the function
         }
+    
+        // Construct the review_by object
+        const review_by = {
+            name: Cookies.get("profile_name"),
+            username: Cookies.get("profile_username")
+        };
+    
+        // Create form data to handle file upload
+        const formData = new FormData();
+        formData.append("gadget_id", gadget_id);
+        formData.append("gadget_name", gadget.gadgetName);
+        formData.append("rating", ratingValue);
+        formData.append("review_header", review_header);
+        formData.append("review_msg", review_msg);
+        formData.append("review_by[name]", review_by.name); 
+        formData.append("review_by[username]", review_by.username); 
+        formData.append("verifiedUser", verifiedUser); // Add verifiedUser
+        formData.append("image", file); // Add file
+    
+        // Send the review data
+        axios.post("http://localhost:4000/api/reviews", formData, {
+            headers: {
+                "Content-Type": "multipart/form-data" // Specify content type for file upload
+            }
+        })
+        .then(response => {
+            // Handle successful response
+            console.log("Review added successfully:", response.data);
+            // Optionally, you can clear the form fields or perform any other actions after adding the review
+        })
+        .catch(error => {
+            // Handle error
+            console.error("Error adding review:", error);
+            alert("Failed to add review. Please try again later.");
+        });
     }
+    
 
     return (
         <div className="view_product">
@@ -173,6 +201,13 @@ function ViewProduct() {
                         value={review_msg}
                         onChange={(e) => { setReviewText(e.target.value) }}
                         required />
+                    <div>
+                        <input type="checkbox" id="verified-user" checked={verifiedUser} onChange={() => setVerifiedUser(!verifiedUser)} />
+                        <label htmlFor="verified-user">Verified User? Check this box and upload product image!!</label>
+                    </div>
+                    <div>
+                        <input type="file" id="file-upload" onChange={(e) => setFile(e.target.files[0])} disabled={!verifiedUser} />
+                    </div>
                     <button id="submit-review">Submit Review</button>
                 </form>
             </div>

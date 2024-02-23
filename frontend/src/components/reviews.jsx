@@ -11,20 +11,38 @@ function Review({ reviews }) {
         setIsOpen(!isOpen);
     };
 
-    const handleReport = async (reviewId, reportTxt) => {
-        try {
-            const response = await axios.put("http://localhost:4000/api/reviews/"+reviewId, {
-                report_txt: reportTxt,
-                reported: 'yes' // Assuming you want to mark it as reported
-            });
-            
-            console.log('Review reported successfully', response.data);
-            // Reset report reason and close modal
-            setReportReason('');
-            toggleModal();
-        } catch (error) {
-            console.error('Error reporting review:', error);
-            // Handle error, show error message, etc.
+    const handleReport = async (event, reviewId, reportTxt) => {
+        event.preventDefault(); // Prevent the default behavior of the button
+        
+        if (Cookies.get("profile_name") == undefined) {
+            alert("Login First!");
+            location.href = "/login";
+        } else {
+            try {
+                
+                const report = {
+                    report_txt: reportTxt,
+                    reported: 'yes',
+                    reported_by: Cookies.get("profile_name")
+                }
+                console.log(report);
+                const response = await axios.put("http://localhost:4000/api/reviews/" + reviewId, {report});
+                
+                if (response.status >= 200 && response.status < 300) {
+                    alert("Thank you for reporting the review!!");
+                    console.log(response.data)
+                } else {
+                    console.log('Request failed with status:', response.status);
+                    // Handle the error condition
+                }
+                
+                // Reset report reason and close modal
+                setReportReason('');
+                toggleModal();
+            } catch (error) {
+                console.error('Error reporting review:', error);
+                // Handle error, show error message, etc.
+            }
         }
     };
     
@@ -59,7 +77,7 @@ function Review({ reviews }) {
                                     onChange={(e) => setReportReason(e.target.value)}
                                     required
                                 ></textarea>
-                                <button onClick={() => handleReport(review._id, reportReason)}>Report</button>
+                                <button onClick={(event) => handleReport(event,review._id, reportReason)}>Report</button>
                                 <button onClick={toggleModal}>Cancel</button>
                             </div>
                         </div>

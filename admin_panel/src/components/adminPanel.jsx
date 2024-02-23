@@ -16,6 +16,7 @@ const AdminPanel = () => {
                     <li><a href="/reports">Reports</a></li>
                     <li><a href="/addgadget">Add Gadget</a></li>
                     <li><a href="/viewgadget">View Gadgets</a></li>
+                    <li><a href="/verifiedpurchase">View Verified Purchases</a></li>
                 </ul>
             </div>
         </div>

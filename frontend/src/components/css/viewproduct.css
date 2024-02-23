@@ -29,3 +29,79 @@
     border: 1px solid rgb(205, 205, 205);
   }
   
+
+/* Styling for the checkbox and label */
+.checkbox-container {
+  display: inline-block;
+  margin-right: 5px;
+}
+
+.checkbox-container input[type="checkbox"] {
+  display: none;
+}
+
+.checkbox-container label {
+  font-size: 16px;
+  cursor: pointer;
+}
+
+.checkbox-custom {
+  width: 20px;
+  height: 20px;
+  background-color: #fff;
+  border: 1px solid #999;
+  border-radius: 3px;
+  display: inline-block;
+  vertical-align: middle;
+}
+
+.checkbox-custom.checked {
+  background-color: #007bff;
+}
+
+.checkbox-custom.checked:after {
+  content: "\2713";
+  font-size: 14px;
+  color: #fff;
+  position: absolute;
+  top: 2px;
+  left: 6px;
+}
+
+/* Styling for the file upload input and label */
+.file-upload-container {
+  margin-top: 10px;
+}
+
+.file-upload-container input[type="file"] {
+  display: none; /* Hide the default file input */
+}
+
+.file-upload-container label {
+  background-color: #007bff;
+  color: white;
+  padding: 10px 15px;
+  border-radius: 5px;
+  cursor: pointer;
+}
+
+.file-upload-container label.disabled {
+  background-color: #999;
+  cursor: not-allowed;
+}
+
+/* Styling for the Submit Review button */
+#submit-review {
+  background-color: #28a745;
+  color: white;
+  padding: 10px 20px;
+  border: none;
+  border-radius: 5px;
+  cursor: pointer;
+  display: block;
+  margin-top: 10px;
+}
+
+#submit-review:hover {
+  background-color: #218838;
+}

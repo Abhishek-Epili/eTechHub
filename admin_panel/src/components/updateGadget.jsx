@@ -10,7 +10,7 @@ const UpdateGadget = () => {
         gadgetName: "",
         gadgetBrand: "",
         gadgetImage: "",
-        gadgetPrice: "",
+        gadgetPrice: 0,
         rating: 0,
         gadgetSpecs: [{ spec: "", value: "" }],
         buy_links: [{ name: "", value: "" }],
@@ -35,15 +35,18 @@ const UpdateGadget = () => {
 
     const handleInputChange = (e, index, field, subField) => {
         const newFormData = { ...formData };
-
+    
         if (field === "gadgetSpecs" || field === "buy_links") {
             newFormData[field][index][subField] = e.target.value;
+        } else if (field === "gadgetPrice") {
+            // Convert the input value to a number using parseFloat or parseInt
+            newFormData[field] = parseFloat(e.target.value);
         } else {
             newFormData[field] = e.target.value;
         }
-
         setFormData(newFormData);
     };
+    
 
     const handleAddField = (field) => {
         setFormData((prevData) => ({
@@ -65,21 +68,24 @@ const UpdateGadget = () => {
         ))
         formData.gadgetSpecs = l_gadgetSpecs
         formData.buy_links = l_buy_links
-        const response = axios.put("http://localhost:4000/api/products/"+gadget_id, formData)
-        if(response.ok){
-            alert("Gadget Added!")
-        location.reload();
-        }
-        else{
-            console.log(response.error);
-        }
-        console.log("Form data submitted:", formData);
+        console.log(formData)
+        const response = axios.put("http://localhost:4000/api/products/"+gadget_id, formData).
+        then(response => {
+            if (response.status >= 200 && response.status < 300) {
+                alert("Gadget Updated!");
+                location.href="/viewgadget";
+              // Further processing of the response
+            } else {
+              console.log('Request failed with status:', response.status);
+              // Handle the error condition
+            }
+          })
     };
 
     return (
         <div className="add-product-container">
             <h2>Add Product</h2>
-            <form onSubmit={handleSubmit}>
+            <form>
                 <label>Type:</label>
                 <input
                     type="text"
@@ -173,7 +179,7 @@ const UpdateGadget = () => {
                     + Add Buy Link
                 </button>
 
-                <button className="button" type="submit">Submit</button>
+                <button onClick={handleSubmit} className="button" type="submit">Submit</button>
             </form>
         </div>
     );

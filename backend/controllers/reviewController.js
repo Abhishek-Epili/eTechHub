@@ -13,25 +13,68 @@ const getReview = async (req, res) => {
     }
 };
 
-const createReview = async (req, res) => {
-    const { gadget_id, rating, review_header, review_msg, review_by } = req.body;
+const getVerifiedUsers = async (req, res) => {
+    const { id } = req.params;
     try {
-        const review = await Review.create({ gadget_id, rating, review_header, review_msg, review_by  });
-        res.status(200).json(review);
+        const query = {
+            "verified_user": true
+        };
+        const reviews = await Review.find(query, {}).sort({ createdAt: -1 });
+        res.status(200).json(reviews);
     } catch (error) {
         res.status(400).json({ error: error.message });
     }
 };
 
+const createReview = async (req, res) => {
+    const { gadget_id, gadget_name, rating, review_header,review_by, review_msg, verifiedUser } = req.body;
+    let review = {}
+    const file = req.file; // Access the uploaded file from req.file
+    if (file !== undefined) {
+        review = {
+            gadget_id: gadget_id,
+            gadget_name: gadget_name,
+            rating: rating,
+            review_header: review_header,
+            review_msg: review_msg,
+            review_by: review_by,
+            verified_user: verifiedUser,
+            file: {
+                data: file.buffer, // Store file data as Buffer
+                contentType: file.mimetype // Store file content type
+            }
+        }
+    }
+    else {
+        review = {
+            gadget_id: gadget_id,
+            gadget_name: gadget_name,
+            rating: rating,
+            review_header: review_header,
+            review_msg: review_msg,
+            review_by: review_by,
+            verified_user: verifiedUser,
+            file: null
+        }
+    }
+    console.log(review)
+    try {
+        // Assuming Review is your Mongoose model
+        const response = await Review.create(review);
+        res.status(200).json(response);
+    } catch (error) {
+        console.log(error.message)
+        res.status(400).json({ error: error.message });
+    }
+};
+
+
 const updateReview = async (req, res) => {
     const { id } = req.params;
-    const { reported, report_txt } = req.body;
+    const { report } = req.body;
+
     try {
-        const updatedReview = await Review.findByIdAndUpdate(
-            id,
-            { reported, report_txt }, // Update only specific fields
-            { new: true }
-        );
+        const updatedReview = await Review.findByIdAndUpdate(id, { report }, { new: true });
         if (!updatedReview) {
             return res.status(404).json({ error: 'Review not found' });
         }
@@ -44,8 +87,7 @@ const updateReview = async (req, res) => {
 
 const getReportedReviews = async (req, res) => {
     try {
-        const query = { reported: 'yes' }; // Query for reported reviews
-        const reviews = await Review.find(query);
+        const reviews = await Review.find({ 'report.reported': 'yes' });
         res.status(200).json(reviews);
     } catch (error) {
         res.status(400).json({ error: error.message });
@@ -57,5 +99,6 @@ module.exports = {
     getReview,
     createReview,
     updateReview,
-    getReportedReviews
+    getReportedReviews,
+    getVerifiedUsers
 };
