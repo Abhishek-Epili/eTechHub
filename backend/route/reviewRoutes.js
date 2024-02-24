@@ -2,6 +2,7 @@ const express = require("express");
 const multer = require('multer');
 const { 
     getReview,
+    getGadgetReviews,
     createReview,
     updateReview,
     getReportedReviews,
@@ -11,6 +12,8 @@ const {
 const router = express.Router()
 
 router.get("/getReview/:id",getReview)
+
+router.get("/getGadgetReviews/:id",getGadgetReviews)
 
 router.get("/getVerifiedUsers",getVerifiedUsers)
 

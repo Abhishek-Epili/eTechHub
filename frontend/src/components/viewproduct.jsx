@@ -30,7 +30,7 @@ function ViewProduct() {
             setGadget(gadgetDetails)
         }
         const fetchReviews = async () => {
-            const response = await fetch("http://localhost:4000/api/reviews/getReview/" + gadget_id)
+            const response = await fetch("http://localhost:4000/api/reviews/getGadgetReviews/" + gadget_id)
             const reviews = await response.json()
             setReviews(reviews)
             setDisplayedReviews(reviews)

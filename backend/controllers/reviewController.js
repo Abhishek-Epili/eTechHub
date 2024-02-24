@@ -1,6 +1,6 @@
 const Review = require("../models/reviewSchema");
 
-const getReview = async (req, res) => {
+const getGadgetReviews = async (req, res) => {
     const { id } = req.params;
     try {
         const query = {
@@ -13,11 +13,25 @@ const getReview = async (req, res) => {
     }
 };
 
+const getReview = async (req, res) => {
+    const { id } = req.params;
+    try {
+        const query = {
+            "_id": id
+        };
+        const reviews = await Review.find(query, {}).sort({ createdAt: -1 });
+        res.status(200).json(reviews);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
+
+
 const getVerifiedUsers = async (req, res) => {
     const { id } = req.params;
     try {
         const query = {
-            "verified_user": true
+            "verified_user": "pending"
         };
         const reviews = await Review.find(query, {}).sort({ createdAt: -1 });
         res.status(200).json(reviews);
@@ -72,9 +86,9 @@ const createReview = async (req, res) => {
 const updateReview = async (req, res) => {
     const { id } = req.params;
     const { report } = req.body;
-
+    console.log(report)
     try {
-        const updatedReview = await Review.findByIdAndUpdate(id, { report }, { new: true });
+        const updatedReview = await Review.findByIdAndUpdate(id,  report , { new: true });
         if (!updatedReview) {
             return res.status(404).json({ error: 'Review not found' });
         }
@@ -97,6 +111,7 @@ const getReportedReviews = async (req, res) => {
 
 module.exports = {
     getReview,
+    getGadgetReviews,
     createReview,
     updateReview,
     getReportedReviews,

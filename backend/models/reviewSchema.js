@@ -57,8 +57,8 @@ const reviewSchema = new Schema({
         default: {}
     },
     verified_user: {
-        type: Boolean,
-        default: false
+        type: String,
+        default: "pending"
     },
     file: {
         data: Buffer, // Storing file data as Buffer
