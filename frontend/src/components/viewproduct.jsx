@@ -21,6 +21,7 @@ function ViewProduct() {
     const [review_msg, setReviewText] = useState('');
     const [gadget, setGadget] = useState({});
     const [verifiedUser, setVerifiedUser] = useState(false);
+    const [verifiedUserValue, setVerifiedUserValue] = useState("false");
     const [file, setFile] = useState(null);
 
     useEffect(() => {
@@ -38,6 +39,17 @@ function ViewProduct() {
         fetchGadget();
         fetchReviews();
     }, [])
+
+    function setVerifiedValue(){
+        if(!verifiedUser){
+            setVerifiedUserValue("pending")
+            console.log("Changed to pending")
+        }
+        else{
+            setVerifiedUserValue("false")
+            console.log("Changed to false")
+        }
+    }
 
     function handleSearchChange(text){
         setDisplayedReviews(reviews.filter(review => review.review_header.toLowerCase().startsWith(text)))
@@ -67,7 +79,6 @@ function ViewProduct() {
     };
 
     function addReview(e) {
-    
         // Check if the user is logged in
         if (Cookies.get("profile_name") === undefined) {
             alert("Login First!");
@@ -96,9 +107,11 @@ function ViewProduct() {
         formData.append("review_msg", review_msg);
         formData.append("review_by[name]", review_by.name); 
         formData.append("review_by[username]", review_by.username); 
-        formData.append("verifiedUser", verifiedUser); // Add verifiedUser
+        formData.append("verifiedUser", verifiedUserValue); // Add verifiedUser
         formData.append("image", file); // Add file
-    
+        formData.forEach(function(value, key){
+            console.log(key + ': ' + value);
+        });
         // Send the review data
         axios.post("http://localhost:4000/api/reviews", formData, {
             headers: {
@@ -202,7 +215,7 @@ function ViewProduct() {
                         onChange={(e) => { setReviewText(e.target.value) }}
                         required />
                     <div>
-                        <input type="checkbox" id="verified-user" checked={verifiedUser} onChange={() => setVerifiedUser(!verifiedUser)} />
+                        <input type="checkbox" id="verified-user" checked={verifiedUser} onChange={() => {setVerifiedUser(!verifiedUser); setVerifiedValue();}} />
                         <label htmlFor="verified-user">Verified User? Check this box and upload product image!!</label>
                     </div>
                     <div>

@@ -64,8 +64,10 @@ function Review({ reviews }) {
                     {review.review_by.username !== Cookies.get("profile_username") && (
                         <a href="#" className="report-link" onClick={() => toggleModal(review._id)}>Report</a>
                     )}
-                    <p className="review-author"> {review.review_by.name}</p>
-                    <p className="review-header">About: {review.review_header}</p>
+                    <div className="review-author"> {review.review_by.name}</div>
+                    {review.verified_user == "true" && (<div style={{float: "right", marginRight: '10px'}}>VERIFIED USER!</div>)}
+                    <div className="review-header">About: {review.review_header}</div>
+                    {review.file && review.verified_user == "true" && (<a style={{marginRight: "10px", float: "right"}} href={`/viewreviewimage/${review._id}`}>View Image</a>)}
                     <p className="review-text">Review: {review.review_msg}</p>
                     {isOpen && (
                         <div className="floating-window">
