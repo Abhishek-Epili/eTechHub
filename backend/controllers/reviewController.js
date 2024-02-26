@@ -41,7 +41,7 @@ const getVerifiedUsers = async (req, res) => {
 };
 
 const createReview = async (req, res) => {
-    const { gadget_id, gadget_name, rating, review_header,review_by, review_msg, verifiedUser } = req.body;
+    const { gadget_id, gadget_name, rating, review_header,review_by, legit, review_msg, verifiedUser } = req.body;
     let review = {}
     const file = req.file; // Access the uploaded file from req.file
     if (file !== undefined) {
@@ -52,6 +52,7 @@ const createReview = async (req, res) => {
             review_header: review_header,
             review_msg: review_msg,
             review_by: review_by,
+            legit: legit,
             verified_user: verifiedUser,
             file: {
                 data: file.buffer, // Store file data as Buffer
@@ -67,6 +68,7 @@ const createReview = async (req, res) => {
             review_header: review_header,
             review_msg: review_msg,
             review_by: review_by,
+            legit: legit,
             verified_user: verifiedUser,
             file: null
         }
@@ -82,6 +84,16 @@ const createReview = async (req, res) => {
     }
 };
 
+const deleteReview = async(req,res)=>{
+    const{id} = req.params;
+    try{
+        const deletedReview = await Review.findByIdAndDelete(id,{new: true});
+        res.status(200).json(deletedReview)
+    }
+    catch(err){
+        res.status(400).json({error: err})
+    }
+}
 
 const updateReview = async (req, res) => {
     const { id } = req.params;
@@ -115,5 +127,6 @@ module.exports = {
     createReview,
     updateReview,
     getReportedReviews,
-    getVerifiedUsers
+    getVerifiedUsers,
+    deleteReview
 };

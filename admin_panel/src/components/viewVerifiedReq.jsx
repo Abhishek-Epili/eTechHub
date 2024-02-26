@@ -4,7 +4,7 @@ import axios from "axios";
 import '../css/verifiedPurchases.css'
 
 function ViewVerifiedReq() {
-    const { id } = useParams();
+    const { id, viewreview } = useParams();
     const [reviews, setReviews] = useState([]);
 
     // Function to convert ArrayBuffer to Base64
@@ -16,16 +16,16 @@ function ViewVerifiedReq() {
         return base64String;
     }
 
-    async function handleSubmit(value,id){
-        const report = {"verified_user": value}
-        console.log(report,id)
-        axios.put("http://localhost:4000/api/reviews/" + id, {report}).
-        then(response=>{
-            alert("Done")
-            location.href="/verifiedpurchase";
-        });
+    async function handleSubmit(value, id) {
+        const report = { "verified_user": value }
+        console.log(report, id)
+        axios.put("http://localhost:4000/api/reviews/" + id, { report }).
+            then(response => {
+                alert("Done")
+                location.href = "/verifiedpurchase";
+            });
     }
-    
+
     useEffect(() => {
         const fetchData = async () => {
             try {
@@ -73,8 +73,13 @@ function ViewVerifiedReq() {
                         <p>No image uploaded</p>
                     )}
                     <br />
-                    <button onClick={()=>{handleSubmit("true",review._id)}}>Accept</button>
-                    <button onClick={()=>{handleSubmit("false",review._id)}}>Reject</button>
+                    {viewreview == "editreview" &&
+                        (<>
+                            <button onClick={() => { handleSubmit("true", review._id) }}>Accept</button>
+                            <button onClick={() => { handleSubmit("false", review._id) }}>Reject</button>
+                        </>
+                        )
+                    }
                 </div>
             ))}
         </div>

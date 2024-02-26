@@ -24,7 +24,7 @@ function App() {
         <Route path="/adminlogin" element={<AdminLogin />} />
         <Route path="/verifiedpurchase" element={<VerifiedPurchase />} />
         <Route path="/updategadget/:gadget_id" element={<UpdateGadget />} />
-        <Route path="/getReview/:id" element={<ViewVerifiedReq />} />
+        <Route path="/getReview/:id/:viewreview" element={<ViewVerifiedReq />} />
       </Routes>
       </div>
     </div>

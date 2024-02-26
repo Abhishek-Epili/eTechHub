@@ -40,7 +40,7 @@ function VerifiedPurchase() {
                     <p>Review for: {review.gadget_name}</p>
                     <p>Review Header: {review.review_header}</p>
                     <p>Review by: {review.review_by?.name}</p>
-                    <a href={`/getReview/${review._id}`} >Inspect</a>
+                    <a href={`/getReview/${review._id}/editreview`} >Inspect</a>
                 </div>
             ))}
         </div>

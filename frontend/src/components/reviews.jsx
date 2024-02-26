@@ -11,7 +11,7 @@ function Review({ reviews }) {
         setIsOpen(!isOpen);
     };
 
-    const handleReport = async (event, reviewId, reportTxt) => {
+    const handleReport = async (event, review) => {
         event.preventDefault(); // Prevent the default behavior of the button
         
         if (Cookies.get("profile_name") == undefined) {
@@ -19,14 +19,20 @@ function Review({ reviews }) {
             location.href = "/login";
         } else {
             try {
-                
-                const report = {
-                    report_txt: reportTxt,
-                    reported: 'yes',
+            
+                    
+                console.log({review_id: review._id,
+                    review_msg: review.review_msg,
+                    review_by: review.review_by.username,
+                    report_txt: reportReason,
                     reported_by: Cookies.get("profile_name")
-                }
-                console.log(report);
-                const response = await axios.put("http://localhost:4000/api/reviews/" + reviewId, {report});
+                });
+                const response = await axios.post("http://localhost:4000/api/reports", {review_id: review._id,
+                review_msg: review.review_msg,
+                review_by: review.review_by.username,
+                report_txt: reportReason,
+                reported_by: Cookies.get("profile_name")
+            });
                 
                 if (response.status >= 200 && response.status < 300) {
                     alert("Thank you for reporting the review!!");
@@ -79,7 +85,7 @@ function Review({ reviews }) {
                                     onChange={(e) => setReportReason(e.target.value)}
                                     required
                                 ></textarea>
-                                <button onClick={(event) => handleReport(event,review._id, reportReason)}>Report</button>
+                                <button onClick={(event) => handleReport(event,review)}>Report</button>
                                 <button onClick={toggleModal}>Cancel</button>
                             </div>
                         </div>

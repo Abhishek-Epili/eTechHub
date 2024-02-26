@@ -6,7 +6,8 @@ const {
     createReview,
     updateReview,
     getReportedReviews,
-    getVerifiedUsers
+    getVerifiedUsers,
+    deleteReview
 } = require("../controllers/reviewController")
 
 const router = express.Router()
@@ -25,5 +26,6 @@ router.post("/",upload.single('image'),createReview)
 router.put("/:id",updateReview)
 
 router.get("/getReportedReviews",getReportedReviews)
+router.delete("/deleteReview/:id",deleteReview)
 
 module.exports = router

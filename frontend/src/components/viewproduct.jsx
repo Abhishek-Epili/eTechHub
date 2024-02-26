@@ -23,6 +23,7 @@ function ViewProduct() {
     const [verifiedUser, setVerifiedUser] = useState(false);
     const [verifiedUserValue, setVerifiedUserValue] = useState("false");
     const [file, setFile] = useState(null);
+    const [legit, setLegit] = useState("yes");
 
     useEffect(() => {
         const fetchGadget = async () => {
@@ -79,6 +80,7 @@ function ViewProduct() {
     };
 
     function addReview(e) {
+        e.preventDefault();
         // Check if the user is logged in
         if (Cookies.get("profile_name") === undefined) {
             alert("Login First!");
@@ -99,6 +101,22 @@ function ViewProduct() {
         };
     
         // Create form data to handle file upload
+        let verified = 0;
+        if(verifiedUserValue=="pending"){
+            verified = 1;
+        }
+        else{
+            verified = 0;
+        }
+        axios.post("http://127.0.0.1:5000/predict",{
+            "RATING": [ratingValue],
+            "VERIFIED_PURCHASE":verified,
+            "REVIEW_TITLE": review_header,
+            "REVIEW_TEXT": review_msg
+        }).then(response=>{
+            console.log(response.data)
+            setLegit(response.data.Output)
+        })
         const formData = new FormData();
         formData.append("gadget_id", gadget_id);
         formData.append("gadget_name", gadget.gadgetName);
@@ -107,12 +125,13 @@ function ViewProduct() {
         formData.append("review_msg", review_msg);
         formData.append("review_by[name]", review_by.name); 
         formData.append("review_by[username]", review_by.username); 
+        formData.append("legit",legit);
         formData.append("verifiedUser", verifiedUserValue); // Add verifiedUser
         formData.append("image", file); // Add file
         formData.forEach(function(value, key){
             console.log(key + ': ' + value);
         });
-        // Send the review data
+
         axios.post("http://localhost:4000/api/reviews", formData, {
             headers: {
                 "Content-Type": "multipart/form-data" // Specify content type for file upload

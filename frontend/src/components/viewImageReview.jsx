@@ -36,6 +36,7 @@ function ViewImageReview(){
                 <center key={review._id}>
                 {review.file ? (
                     <img
+                    style={{maxHeight: "80vh"}}
                         src={(() => {
                             if (review.file.data && review.file.contentType) {
                                 const base64Data = arrayBufferToBase64(review.file.data.data);
