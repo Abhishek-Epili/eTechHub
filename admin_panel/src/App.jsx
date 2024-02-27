@@ -9,6 +9,7 @@ import ViewGadget from './components/viewGadget'
 import UpdateGadget from './components/updateGadget'
 import VerifiedPurchase from './components/verifiedPurchases'
 import ViewVerifiedReq from './components/viewVerifiedReq'
+import ViewDetectedReviews from './components/viewDetectedReviews'
 
 function App() {
 
@@ -25,6 +26,7 @@ function App() {
         <Route path="/verifiedpurchase" element={<VerifiedPurchase />} />
         <Route path="/updategadget/:gadget_id" element={<UpdateGadget />} />
         <Route path="/getReview/:id/:viewreview" element={<ViewVerifiedReq />} />
+        <Route path="/viewfakereviews" element={<ViewDetectedReviews />} />
       </Routes>
       </div>
     </div>

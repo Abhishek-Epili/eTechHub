@@ -23,8 +23,8 @@ function ViewProduct() {
     const [verifiedUser, setVerifiedUser] = useState(false);
     const [verifiedUserValue, setVerifiedUserValue] = useState("false");
     const [file, setFile] = useState(null);
-    const [legit, setLegit] = useState("yes");
-
+    const [legit, setLegit] = useState("");
+    const [finalFormData, setFinalFormData] = useState(new FormData());
     useEffect(() => {
         const fetchGadget = async () => {
             const response = await fetch("http://localhost:4000/api/products/" + gadget_id)
@@ -71,6 +71,50 @@ function ViewProduct() {
         }
     }
 
+    useEffect(() => {
+
+        if (legit !== "") {
+
+            const review_by = {
+                name: Cookies.get("profile_name"),
+                username: Cookies.get("profile_username")
+            };
+    
+            const formData = new FormData();
+    
+            formData.append("gadget_id", gadget_id);
+            formData.append("gadget_name", gadget.gadgetName);
+            formData.append("rating", ratingValue);
+            formData.append("review_header", review_header);
+            formData.append("review_msg", review_msg);
+            formData.append("review_by[name]", review_by.name); 
+            formData.append("review_by[username]", review_by.username); 
+            formData.append("legit",legit);
+            formData.append("verifiedUser", verifiedUserValue); // Add verifiedUser
+            formData.append("image", file); // Add file
+            
+            setFinalFormData(formData)
+
+
+            axios.post("http://localhost:4000/api/reviews", formData, {
+            headers: {
+                "Content-Type": "multipart/form-data" // Specify content type for file upload
+            }
+            })
+            .then(response => {
+                // Handle successful response
+                console.log("Review added successfully:", response.data);
+                // Optionally, you can clear the form fields or perform any other actions after adding the review
+            })
+            .catch(error => {
+                // Handle error
+                console.error("Error adding review:", error);
+                alert("Failed to add review. Please try again later.");
+            });
+        }
+        
+    },[legit])
+
     function handleDisableClick(){
         setDisplayedReviews(reviews)
     }
@@ -80,7 +124,7 @@ function ViewProduct() {
     };
 
     function addReview(e) {
-        e.preventDefault();
+     
         // Check if the user is logged in
         if (Cookies.get("profile_name") === undefined) {
             alert("Login First!");
@@ -95,10 +139,8 @@ function ViewProduct() {
         }
     
         // Construct the review_by object
-        const review_by = {
-            name: Cookies.get("profile_name"),
-            username: Cookies.get("profile_username")
-        };
+        
+        
     
         // Create form data to handle file upload
         let verified = 0;
@@ -117,36 +159,26 @@ function ViewProduct() {
             console.log(response.data)
             setLegit(response.data.Output)
         })
-        const formData = new FormData();
-        formData.append("gadget_id", gadget_id);
-        formData.append("gadget_name", gadget.gadgetName);
-        formData.append("rating", ratingValue);
-        formData.append("review_header", review_header);
-        formData.append("review_msg", review_msg);
-        formData.append("review_by[name]", review_by.name); 
-        formData.append("review_by[username]", review_by.username); 
-        formData.append("legit",legit);
-        formData.append("verifiedUser", verifiedUserValue); // Add verifiedUser
-        formData.append("image", file); // Add file
-        formData.forEach(function(value, key){
+
+        finalFormData.forEach(function(value, key){
             console.log(key + ': ' + value);
         });
 
-        axios.post("http://localhost:4000/api/reviews", formData, {
-            headers: {
-                "Content-Type": "multipart/form-data" // Specify content type for file upload
-            }
-        })
-        .then(response => {
-            // Handle successful response
-            console.log("Review added successfully:", response.data);
-            // Optionally, you can clear the form fields or perform any other actions after adding the review
-        })
-        .catch(error => {
-            // Handle error
-            console.error("Error adding review:", error);
-            alert("Failed to add review. Please try again later.");
-        });
+        // axios.post("http://localhost:4000/api/reviews", finalFormData, {
+        //     headers: {
+        //         "Content-Type": "multipart/form-data" // Specify content type for file upload
+        //     }
+        // })
+        // .then(response => {
+        //     // Handle successful response
+        //     console.log("Review added successfully:", response.data);
+        //     // Optionally, you can clear the form fields or perform any other actions after adding the review
+        // })
+        // .catch(error => {
+        //     // Handle error
+        //     console.error("Error adding review:", error);
+        //     alert("Failed to add review. Please try again later.");
+        // });
     }
     
 

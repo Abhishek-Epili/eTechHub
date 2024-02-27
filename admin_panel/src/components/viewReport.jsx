@@ -22,9 +22,9 @@ function ViewReport() {
         fetchReports();
     }, []);
 
-    function handleIgnore(report_id){
+    function handleIgnore(report_id) {
         axios.put("http://localhost:4000/api/reports/" + report_id, {
-                "report_status": "done"
+            "report_status": "done"
         })
             .then(response => {
                 alert("Report updated!");
@@ -35,13 +35,13 @@ function ViewReport() {
     }
 
     function handleDelete(review_id, report_id) {
-        axios.delete("http://localhost:4000/api/reviews/deleteReview/"+review_id).
-        then(response => {
-            console.log(response.data)
-        }).
-        catch(err=>{
-            console.log(err)
-        })
+        axios.delete("http://localhost:4000/api/reviews/deleteReview/" + review_id).
+            then(response => {
+                console.log(response.data)
+            }).
+            catch(err => {
+                console.log(err)
+            })
 
         handleIgnore(report_id)
 
@@ -68,7 +68,7 @@ function ViewReport() {
                             <div>Review Text: {report.review_msg}</div>
                             <button style={{ float: "right" }} onClick={() => { handleDelete(report.review_id, report._id) }} >Delete Review</button>
                             <button style={{ float: "right" }}>Block/Ban User</button>
-                            <button style={{ float: "right" }} onClick={()=>{handleIgnore(report._id)}}>Ignore Report</button>
+                            <button style={{ float: "right" }} onClick={() => { handleIgnore(report._id) }}>Ignore Report</button>
                             <div>Review Reported By: {report.reported_by}</div>
                             <div>Report Text: {report.report_txt}</div>
                             <a href={`/getReview/${report.review_id}/viewreview`}>Inspect</a>

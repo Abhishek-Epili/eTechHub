@@ -36,8 +36,7 @@ const reviewSchema = new Schema({
         }
     },
     legit: {
-        type: String,
-        default: "yes"
+        type: String
     },
     report: {
         type: {

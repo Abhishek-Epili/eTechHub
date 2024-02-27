@@ -7,7 +7,8 @@ const {
     updateReview,
     getReportedReviews,
     getVerifiedUsers,
-    deleteReview
+    deleteReview,
+    getFakeReviews
 } = require("../controllers/reviewController")
 
 const router = express.Router()
@@ -17,6 +18,8 @@ router.get("/getReview/:id",getReview)
 router.get("/getGadgetReviews/:id",getGadgetReviews)
 
 router.get("/getVerifiedUsers",getVerifiedUsers)
+
+router.get("/getFakeReviews",getFakeReviews)
 
 const storage = multer.memoryStorage();
 const upload = multer({ storage: storage });

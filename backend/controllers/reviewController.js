@@ -13,6 +13,19 @@ const getGadgetReviews = async (req, res) => {
     }
 };
 
+const getFakeReviews = async (req, res) => {
+    try {
+        const query = {
+            "legit": "no"
+        };
+        const reviews = await Review.find(query, {}).sort({ createdAt: -1 });
+        res.status(200).json(reviews);
+    } catch (error) {
+        res.status(400).json({ error: error.message });
+    }
+};
+
+
 const getReview = async (req, res) => {
     const { id } = req.params;
     try {
@@ -42,6 +55,7 @@ const getVerifiedUsers = async (req, res) => {
 
 const createReview = async (req, res) => {
     const { gadget_id, gadget_name, rating, review_header,review_by, legit, review_msg, verifiedUser } = req.body;
+    console.log(legit)
     let review = {}
     const file = req.file; // Access the uploaded file from req.file
     if (file !== undefined) {
@@ -128,5 +142,6 @@ module.exports = {
     updateReview,
     getReportedReviews,
     getVerifiedUsers,
-    deleteReview
+    deleteReview,
+    getFakeReviews
 };
